@@ -2,7 +2,123 @@
 
 \providecommand\PSUtoname{To Someone}
 \providecommand\PSUtoaddress{To Address\\Goes Here}
-\input{PSU}
+
+
+% Measurements are taken directly from the guide
+\usepackage[top=1in,left=0.75in,bottom=1in,right=0.75in]{geometry}
+\usepackage{graphicx}
+\usepackage[colorlinks=false,
+            pdfborder={0 0 0},
+            ]{hyperref}
+\usepackage[absolute]{textpos}
+\usepackage{ifthen}
+\usepackage{soul}
+
+%
+%% --- For placement of the horizontal line
+%\usepackage{tikz}
+%\usetikzlibrary{calc}
+
+% --- A nice serif font (palatino), but not the prescribed nonfree ITC stone
+% \usepackage[sc,osf]{mathpazo}
+% \linespread{1.05}
+
+% Remove paragraph indentation
+\parindent0pt
+\setlength{\parskip}{0.8\baselineskip}
+\raggedright
+\pagestyle{empty}
+% Ensure consistency in the footer
+\urlstyle{sf}
+
+\providecommand\PSUfromname{My Name}
+\providecommand\PSUfromtitle{Professor Title}
+\providecommand\PSUfromdegree{}
+\providecommand\PSUfromdepartment{Department of X}
+\providecommand\PSUfromcollege{College of Y and Z}
+\providecommand\PSUfromuniversity{The Pennsylvania State University}
+\providecommand\PSUfromaddress{OFFICE\\University Park, PA 16802}
+\providecommand\PSUfromtel{XXX-XXX-XXXX}
+\providecommand\PSUfromfax{YYY-YYY-YYYY}
+\providecommand\PSUfromemail{\url{email@psu.edu}}
+\providecommand\PSUfromweb{\url{http://www.website.edu}}
+
+\providecommand\PSUtoname{PSUtoname}
+\providecommand\PSUtoaddress{PSUtoaddress}
+\providecommand\PSUdate{\vspace{2.5cm}\today}
+\providecommand\PSUopening{Dear \PSUtoname,}
+\providecommand\PSUclosing{Sincerely}
+% Update this and the next line to the correct path
+\providecommand\PSUsignaturefile{john_hancock}
+\providecommand\PSUlogofile{new_logo}
+\providecommand\PSUenclosure{}
+
+%\usepackage{lastpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+%\renewcommand{\footrulewidth}{0pt}
+\fancyfoot{}
+%\fancyfoot[R]{{\footnotesize p. \thepage}}%\ of \pageref*{LastPage}}} %uncomment this for page numbers
+
+
+% \fancyfoot[L]{%
+%     {\footnotesize\color{PSUgray}\sffamily
+%     \PSUfromaddress\\[-0.1\baselineskip]
+%     \PSUfromtel\ \textbullet\ Fax: \PSUfromfax\ \textbullet\ \PSUfromemail\ \textbullet\ \PSUfromweb}\color{black}}
+
+\fancypagestyle{cover}{
+\fancyhead[L]{\fontsize{8}{10} \selectfont%
+    \begin{textblock*}{2.5in}[0.365,0.40](1.5in,1.4in)
+            \includegraphics[width=1.5in]{\PSUlogofile}
+    \end{textblock*}
+    \begin{textblock*}{5.375in}(2.4in,1.4in)   % 6.375=8.5 - 1.5 - 0.625
+        {\textbf \PSUfromname}\\
+        \PSUfromtitle\\
+        \PSUfromdepartment
+    \end{textblock*}
+    \begin{textblock*}{5.375in}(4.2in,1.4in)   % 6.375=8.5 - 1.5 - 0.625
+        \PSUfromcollege\\
+        \PSUfromuniversity\\
+        \PSUfromaddress
+    \end{textblock*}
+    \begin{textblock*}{5.375in}(6.6in,1.4in)   % 6.375=8.5 - 1.5 - 0.625
+        \PSUfromtel\\
+        \PSUfromfax\\
+        \PSUfromemail\\
+        \PSUfromweb\\
+    \end{textblock*}
+    }
+}
+
+\renewcommand{\headrulewidth}{0pt}
+
+\AtBeginDocument{
+    \thispagestyle{cover}
+    % Text lines should be less than 6in long
+    \ \\
+    \PSUdate
+    \bigskip
+
+    \PSUtoname\ifthenelse{\equal{\PSUtoname}{}}{}{\\}
+    \PSUtoaddress
+    \bigskip
+
+    \PSUopening\par
+    }
+
+
+\AtEndDocument{
+    \par\vspace{2ex}
+    \PSUclosing,
+
+    \ifthenelse{\equal{\PSUsignaturefile}{}}
+    {\bigskip\bigskip}
+    {\includegraphics[width=2.0in]{\PSUsignaturefile}\\[-0.2\baselineskip]}
+
+    \PSUfromname \\
+    \PSUenclosure
+}
 
 
 \begin{document}
